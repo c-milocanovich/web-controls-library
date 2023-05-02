@@ -29,6 +29,18 @@
   }
 }
 
+@mixin visibility-shadow-DOM-2($display) {
+  display: $display;
+
+  @at-root :host([hidden]:not([invisible-mode="collapse"])) {
+    display: $display !important;
+
+    // "!important" is needed to avoid "visibility: inherit" from "hydrated"
+    // class, due to Shadow DOM selector has no specificity
+    visibility: hidden !important;
+  }
+}
+
 @mixin align-inner-control-in-cell() {
   display: flex;
 
